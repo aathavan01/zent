@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:zent/Verfication/otp.dart';
-import 'package:zent/screens/homePage.dart';
+import 'package:zent/Verfication/mobileNO.dart';
+import 'package:zent/screens/verifyOTP.dart';
 
-class GetOTP extends StatefulWidget {
-   final String? id;
-  GetOTP({required this.id});
+class VerifyOTP extends StatefulWidget {
+  const VerifyOTP({super.key});
 
   @override
-  State<GetOTP> createState() => _GetOTPState();
+  State<VerifyOTP> createState() => _VerifyOTPState();
 }
 
-class _GetOTPState extends State<GetOTP> {
-  TextEditingController _otp = TextEditingController();
+class _VerifyOTPState extends State<VerifyOTP> {
+  TextEditingController _mobile = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,34 +30,58 @@ class _GetOTPState extends State<GetOTP> {
               ),
             ),
             Container(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(0, 8, 220, 0),
+                child: Text(
+                  "Sign in ",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                ),
+              ),
+            ),
+            Container(
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 8, 220, 0),
-                    child: Text(
-                      "Verify OTP ",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(50, 8, 50, 45),
-                    // child: OtpTextField(
-                    //   numberOfFields: 6,
-                    //   borderColor: Color(0xFF512DA8),
-                    //   showFieldAsBox: true,
-                    //   filled: true,
-                    //   keyboardType: TextInputType.number,
-                    //   handleControllers: (controllers) => _otp,
-                    // ),
-                   child: TextFormField(
+                    padding: EdgeInsets.fromLTRB(50, 8, 60, 45),
+                    child: TextFormField(
                       decoration: InputDecoration(
-                        hintText: "otp",
+                        prefixIcon: Icon(Icons.phone_outlined),
+                        hintText: "Mobile number",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      controller: _otp,
+                      controller: _mobile,
+                    ),
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'By signing in, you’re agree to our',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 14),
+                        ),
+                        TextSpan(
+                          text: '\nTerms & Conditions  ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff2B9A9F),
+                              fontSize: 14),
+                        ),
+                        TextSpan(
+                          text: 'and ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 14),
+                        ),
+                        TextSpan(
+                          text: 'Privacy Policy',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff2B9A9F),
+                              fontSize: 14),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -68,30 +90,34 @@ class _GetOTPState extends State<GetOTP> {
                       height: 55,
                       width: 315,
                       child: ElevatedButton(
-                        onPressed: ()  async {
-                          Map<String, String> otpvalue = {
-                            'id':id,
-                            'otp': _otp.text,
+                        onPressed: () async {
+                          Map<String, String> value = {
+                            'phoneNO': _mobile.text,
                           };
+                           Object response = await Http().mobileNO(value);
+                         
+                          final ID = response;
+                          
+
+                          if (response != null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('OTP sent')));
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const HomePage()),
+                                builder: (context) => GetOTP(
+                                      id: "ID",
+                                    ),),
                           );
-                          
-                            
-                          bool status = await OTP().otp(otpvalue);
 
-                          if (status != null) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Signin Successfully')));
+                         
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Signin Failed')));
+                                SnackBar(content: Text('Failed to send OTP')));
                           }
                         },
                         child: Text(
-                          "Start learning now",
+                          "Verify OTP",
                           style: TextStyle(
                               fontWeight: FontWeight.w300, fontSize: 20),
                         ),
@@ -106,7 +132,7 @@ class _GetOTPState extends State<GetOTP> {
                   ),
                 ],
               ),
-            )
+            ),
           ]),
         ),
       ),

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:zent/Verfication/mobileNO.dart';
-import 'package:zent/screens/getOTP.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:zent/Verfication/otp.dart';
+import 'package:zent/screens/homePage.dart';
 
-class VerifyOTP extends StatefulWidget {
-  const VerifyOTP({super.key});
+class GetOTP extends StatefulWidget {
+  final String? id;
+  GetOTP({required this.id});
 
   @override
-  State<VerifyOTP> createState() => _VerifyOTPState();
+  State<GetOTP> createState() => _GetOTPState();
 }
 
-class _VerifyOTPState extends State<VerifyOTP> {
-  TextEditingController _mobile = TextEditingController();
+class _GetOTPState extends State<GetOTP> {
+  TextEditingController _otp = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,58 +32,34 @@ class _VerifyOTPState extends State<VerifyOTP> {
               ),
             ),
             Container(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(0, 8, 220, 0),
-                child: Text(
-                  "Sign in ",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                ),
-              ),
-            ),
-            Container(
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(50, 8, 60, 45),
+                    padding: EdgeInsets.fromLTRB(0, 8, 220, 0),
+                    child: Text(
+                      "Verify OTP ",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(50, 8, 50, 45),
+                    // child: OtpTextField(
+                    //   numberOfFields: 6,
+                    //   borderColor: Color(0xFF512DA8),
+                    //   showFieldAsBox: true,
+                    //   filled: true,
+                    //   keyboardType: TextInputType.number,
+                    //   handleControllers: (controllers) => _otp,
+                    // ),
                     child: TextFormField(
                       decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.phone_outlined),
-                        hintText: "Mobile number",
+                        hintText: "otp",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      controller: _mobile,
-                    ),
-                  ),
-                  Text.rich(
-                    TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'By signing in, you’re agree to our',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300, fontSize: 14),
-                        ),
-                        TextSpan(
-                          text: '\nTerms & Conditions  ',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xff2B9A9F),
-                              fontSize: 14),
-                        ),
-                        TextSpan(
-                          text: 'and ',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300, fontSize: 14),
-                        ),
-                        TextSpan(
-                          text: 'Privacy Policy',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xff2B9A9F),
-                              fontSize: 14),
-                        ),
-                      ],
+                      controller: _otp,
                     ),
                   ),
                   Padding(
@@ -91,34 +69,29 @@ class _VerifyOTPState extends State<VerifyOTP> {
                       width: 315,
                       child: ElevatedButton(
                         onPressed: () async {
-                          Map<String, String> value = {
-                            'phoneNO': _mobile.text,
+                          Map<String, String> otpvalue = {
+                            // 'id':id,
+                            'otp': _otp.text,
                           };
-                           Object response = await Http().mobileNO(value);
-                          print(response);
-                         
-
-                          if (response != null) {
-                            
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('OTP sent')));
-                                 final ID = response;
+                          print(widget.id?? "AATHAV");
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => GetOTP(
-                                      id: "ID",
-                                    ),),
+                                builder: (context) => const HomePage()),
                           );
 
-                         
+                          bool status = await OTP().otp(otpvalue);
+
+                          if (status != null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Signin Successfully')));
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Failed to send OTP')));
+                                SnackBar(content: Text('Signin Failed')));
                           }
                         },
                         child: Text(
-                          "Verify OTP",
+                          "Start learning now",
                           style: TextStyle(
                               fontWeight: FontWeight.w300, fontSize: 20),
                         ),
@@ -133,7 +106,7 @@ class _VerifyOTPState extends State<VerifyOTP> {
                   ),
                 ],
               ),
-            ),
+            )
           ]),
         ),
       ),
