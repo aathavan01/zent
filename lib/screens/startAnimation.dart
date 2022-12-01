@@ -14,7 +14,7 @@ class _StartingAnimationState extends State<StartingAnimation> {
     // TODO: implement initState
     super.initState();
     Timer(
-      Duration(seconds: 5),
+      Duration(seconds:3),
       () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => SignInPage(),),

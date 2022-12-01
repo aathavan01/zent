@@ -19,7 +19,7 @@ class _SignInPageState extends State<SignInPage> {
             body: (Column(
       children: [
         Flexible(
-          flex: 9,
+          flex: 6,
           child:Image.asset(
               "images/Signin.png",
               fit: BoxFit.fitWidth
@@ -28,7 +28,7 @@ class _SignInPageState extends State<SignInPage> {
         
         ),
         Flexible(
-          flex: 5,
+          flex: 6,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.vertical(top: Radius.circular(80)),
@@ -36,23 +36,31 @@ class _SignInPageState extends State<SignInPage> {
             ),
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.fromLTRB(0, 20, 80, 0),
+              padding: EdgeInsets.fromLTRB(0, 60, 0, 0),
               child: Column(
                 children: [
-                  Text(
-                    "Ultimate \nClass Management \nPlatform!",
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 23),
-                  ),
-                  Padding(
-                      padding: EdgeInsets.fromLTRB(8, 0, 30, 10),
-                      child: Text(
-                        "Thank you for joining with us! \nwe are looking to a \nlong & prosperous\n relationship.",
+                  Text.rich(
+                    TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: "Ultimate \nClass Management \nPlatform!",
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 28),
+                        ),
+                      
+                        TextSpan(
+                          text: "\nThank you for joining with us! \nwe are looking to a \nlong & prosperous\n relationship.",
                         style:
-                            TextStyle(fontWeight: FontWeight.w400, height: 1.2),
-                      )),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(60, 0, 0, 5),
-                    child: SizedBox(
+                            TextStyle(fontWeight: FontWeight.w400, height: 1.4),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                
+                 
+                SizedBox(
                       height: 45,
                       width: 260,
                       child: ElevatedButton(
@@ -76,7 +84,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                       ), // Background co
                     ),
-                  ),
+                 
                 ],
               ),
             ),

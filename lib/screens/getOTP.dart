@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zent/Verfication/mobileNO.dart';
-import 'package:zent/screens/verifyOTP.dart';
+import 'package:zent/screens/Signin/verifyOTP.dart';
 
 class VerifyOTP extends StatefulWidget {
   const VerifyOTP({super.key});
@@ -13,6 +13,7 @@ class _VerifyOTPState extends State<VerifyOTP> {
   TextEditingController _mobile = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -29,6 +30,7 @@ class _VerifyOTPState extends State<VerifyOTP> {
                 fit: BoxFit.cover,
               ),
             ),
+            
             Container(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 8, 220, 0),
@@ -84,6 +86,7 @@ class _VerifyOTPState extends State<VerifyOTP> {
                       ],
                     ),
                   ),
+                  
                   Padding(
                     padding: EdgeInsets.fromLTRB(20, 8, 10, 0),
                     child: SizedBox(
@@ -94,28 +97,32 @@ class _VerifyOTPState extends State<VerifyOTP> {
                           Map<String, String> value = {
                             'phoneNO': _mobile.text,
                           };
-                           Object response = await Http().mobileNO(value);
-                         
-                          final ID = response;
-                          
+                          String response = await Http().mobileNO(value);
+                          // final response = "123";
+                          // final ID = response;
+                          // print(ID);
+                     
 
-                          if (response != null) {
+                          if (response != null && _mobile.text != null  ) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text('OTP sent')));
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
                                 builder: (context) => GetOTP(
-                                      id: "ID",
-                                    ),),
-                          );
-
-                         
+                                  id: response,
+                                ),
+                              ),
+                            );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Failed to send OTP')));
+                              SnackBar(
+                                content: Text('Failed to send OTP'),
+                              ),
+                            );
                           }
                         },
+                        
                         child: Text(
                           "Verify OTP",
                           style: TextStyle(

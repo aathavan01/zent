@@ -8,6 +8,7 @@ class GetOTP extends StatefulWidget {
   GetOTP({required this.id});
 
   @override
+  
   State<GetOTP> createState() => _GetOTPState();
 }
 
@@ -15,7 +16,9 @@ class _GetOTPState extends State<GetOTP> {
   TextEditingController _otp = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    
+    return SafeArea(child: 
+    Scaffold(
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(1),
@@ -70,21 +73,22 @@ class _GetOTPState extends State<GetOTP> {
                       child: ElevatedButton(
                         onPressed: () async {
                           Map<String, String> otpvalue = {
-                            // 'id':id,
+                            'id':widget.id?? "AATHAV",
                             'otp': _otp.text,
                           };
                           print(widget.id?? "AATHAV");
+                          
+                          bool status = await OTP().otp(otpvalue);
+
+                          if (status != null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Signin Successfully')));
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const HomePage()),
                           );
 
-                          bool status = await OTP().otp(otpvalue);
-
-                          if (status != null) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Signin Successfully')));
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text('Signin Failed')));
@@ -109,7 +113,7 @@ class _GetOTPState extends State<GetOTP> {
             )
           ]),
         ),
-      ),
+      ),),
     );
   }
 }
