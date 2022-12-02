@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:zent/screens/GetOTP.dart';
+import 'package:zent/screens/login.dart';
+import 'package:zent/screens/otp.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+class LoginSplace extends StatefulWidget {
+  const LoginSplace({super.key});
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<LoginSplace> createState() => _LoginSplaceState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _LoginSplaceState extends State<LoginSplace> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -68,7 +69,7 @@ class _SignInPageState extends State<SignInPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const VerifyOTP()),
+                                builder: (context) => Login()),
                           );
                         },
                         child: Text(

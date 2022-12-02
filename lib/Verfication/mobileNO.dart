@@ -13,4 +13,19 @@ class Http {
     return id;
     // }
   }
+
+  Future<bool> otp(Map OtpNum) async {
+    bool status = false;
+    print(OtpNum);
+    http.Response responseOTP = await http.post(
+        Uri.parse(
+            'https://oyster-app-cabgf.ondigitalocean.app/auth/ConfirmOTP'),
+        body: jsonEncode(OtpNum),
+        headers: {'Content-type': 'application/json'});
+
+    if (responseOTP.statusCode == 200) {
+      status = true;
+    }
+    return status;
+  }
 }

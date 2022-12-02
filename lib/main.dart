@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:zent/screens/startAnimation.dart';
+import 'package:zent/screens/logo.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,7 +22,8 @@ class _MyAppState extends State<MyApp> {
     return 
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: StartingAnimation(),
+      home: Logo(),
     );
   }
 }
+

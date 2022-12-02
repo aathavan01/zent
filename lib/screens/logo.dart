@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'signinPage.dart';
+import 'loginSplace.dart';
 
-class StartingAnimation extends StatefulWidget {
-  const StartingAnimation({super.key});
+class Logo extends StatefulWidget {
+  const Logo({super.key});
 
   @override
-  State<StartingAnimation> createState() => _StartingAnimationState();
+  State<Logo> createState() => _LogoState();
 }
 
-class _StartingAnimationState extends State<StartingAnimation> {
+class _LogoState extends State<Logo> {
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -17,7 +17,7 @@ class _StartingAnimationState extends State<StartingAnimation> {
       Duration(seconds:3),
       () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SignInPage(),),
+                MaterialPageRoute(builder: (context) => LoginSplace(),),
               ),
     );
   }

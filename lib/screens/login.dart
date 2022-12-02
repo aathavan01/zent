@@ -1,19 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:zent/Verfication/mobileNO.dart';
-import 'package:zent/screens/Signin/verifyOTP.dart';
+import 'package:zent/screens/login.dart';
+import 'package:zent/screens/otp.dart';
 
-class VerifyOTP extends StatefulWidget {
-  const VerifyOTP({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  State<VerifyOTP> createState() => _VerifyOTPState();
+  State<Login> createState() => _LoginState();
 }
 
-class _VerifyOTPState extends State<VerifyOTP> {
+class _LoginState extends State<Login> {
   TextEditingController _mobile = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -30,7 +32,6 @@ class _VerifyOTPState extends State<VerifyOTP> {
                 fit: BoxFit.cover,
               ),
             ),
-            
             Container(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(0, 8, 220, 0),
@@ -86,7 +87,6 @@ class _VerifyOTPState extends State<VerifyOTP> {
                       ],
                     ),
                   ),
-                  
                   Padding(
                     padding: EdgeInsets.fromLTRB(20, 8, 10, 0),
                     child: SizedBox(
@@ -97,20 +97,25 @@ class _VerifyOTPState extends State<VerifyOTP> {
                           Map<String, String> value = {
                             'phoneNO': _mobile.text,
                           };
+
                           String response = await Http().mobileNO(value);
                           // final response = "123";
                           // final ID = response;
                           // print(ID);
-                     
+                          var x = jsonDecode(response);
 
-                          if (response != null && _mobile.text != null  ) {
+                          print(x["id"]);
+
+                          if (response != null && _mobile.text.length == 11) {
+                            print(_mobile.text);
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text('OTP sent')));
                             Navigator.push(
+
                               context,
                               MaterialPageRoute(
-                                builder: (context) => GetOTP(
-                                  id: response,
+                                builder: (context) => Otp(
+                                  id: x,
                                 ),
                               ),
                             );
@@ -122,7 +127,6 @@ class _VerifyOTPState extends State<VerifyOTP> {
                             );
                           }
                         },
-                        
                         child: Text(
                           "Verify OTP",
                           style: TextStyle(
