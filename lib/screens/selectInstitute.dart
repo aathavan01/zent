@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:zent/screens/notification.dart';
 import 'package:zent/screens/progresspath.dart';
 
 class SelectInstitute extends StatefulWidget {
@@ -16,23 +17,27 @@ class _SelectInstituteState extends State<SelectInstitute> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          toolbarHeight: 150,
+          toolbarHeight: 80,
           backgroundColor: Color(0xff2B9A9F),
           title: Center(
             child: Text(
-              "Welcome back!\nAATHAV",
+              "              Welcome back!",
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
             ),
           ),
           actions: [
             IconButton(
                 onPressed: () {
-                 
+                 Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>Notifications()),
+                          );
                 },
                 icon: Icon(Icons.notifications_none_outlined)),
             IconButton(
                 onPressed: () {
-                  _settingModalBottomSheet(context);
+                  _SelectInstituteBottomSheet(context);
                 },
                 icon: Icon(Icons.more_vert)),
           ],
@@ -72,7 +77,7 @@ class _SelectInstituteState extends State<SelectInstitute> {
   }
 }
 
-void _settingModalBottomSheet(context) {
+void _SelectInstituteBottomSheet(context) {
   showModalBottomSheet(
       context: context,
       builder: (BuildContext bc) {
@@ -182,7 +187,8 @@ class _GridBState extends State<GridB> {
                       builder: (context) => ProgressPath(),
                     ),
                   );}, child: Text( "${gridMap.elementAt(index)['title']}",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15,color: Colors.black45),))
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15,color: Colors.black45),),),
+             
        ] );
       },
     );

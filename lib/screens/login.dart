@@ -103,8 +103,7 @@ class _LoginState extends State<Login> {
                           // final ID = response;
                           // print(ID);
                           var x = jsonDecode(response);
-
-                          print(x["id"]);
+                          print(response);
 
                           if (response != null && _mobile.text.length == 11) {
                             print(_mobile.text);
@@ -115,10 +114,11 @@ class _LoginState extends State<Login> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Otp(
-                                  id: x,
+                                  id: response,
                                 ),
                               ),
                             );
+
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(

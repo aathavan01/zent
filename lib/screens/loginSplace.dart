@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zent/screens/login.dart';
+import 'package:zent/screens/notification.dart';
 import 'package:zent/screens/otp.dart';
+import 'package:zent/screens/selectInstitute.dart';
 
 class LoginSplace extends StatefulWidget {
   const LoginSplace({super.key});
@@ -69,7 +71,7 @@ class _LoginSplaceState extends State<LoginSplace> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Login()),
+                                builder: (context) => SelectInstitute()),
                           );
                         },
                         child: Text(
