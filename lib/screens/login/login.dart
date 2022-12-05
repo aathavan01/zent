@@ -1,9 +1,10 @@
+// ignore_for_file: unnecessary_null_comparison, avoid_print, use_build_context_synchronously, prefer_const_constructors, duplicate_ignore, sort_child_properties_last, unnecessary_new, avoid_unnecessary_containers
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:zent/Verfication/mobileNO.dart';
-import 'package:zent/screens/login.dart';
-import 'package:zent/screens/otp.dart';
+import 'package:zent/screens/login/otp.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -13,7 +14,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController _mobile = TextEditingController();
+  final TextEditingController _mobile = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +60,7 @@ class _LoginState extends State<Login> {
                   ),
                   Text.rich(
                     TextSpan(
-                      children: <TextSpan>[
+                      children: const <TextSpan>[
                         TextSpan(
                           text: 'By signing in, you’re agree to our',
                           style: TextStyle(
@@ -103,10 +104,10 @@ class _LoginState extends State<Login> {
                           // final ID = response;
                           // print(ID);
                           var x = jsonDecode(response);
-                          print(response);
+                          print(x["id"]);
 
                           if (response != null && _mobile.text.length == 11) {
-                            print(_mobile.text);
+                            // print(_mobile.text);
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text('OTP sent')));
                             Navigator.push(
@@ -114,13 +115,14 @@ class _LoginState extends State<Login> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Otp(
-                                  id: response,
+                                  id: x["id"],
                                 ),
                               ),
                             );
 
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
+                              // ignore: prefer_const_constructors
                               SnackBar(
                                 content: Text('Failed to send OTP'),
                               ),

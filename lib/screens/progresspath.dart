@@ -1,6 +1,8 @@
+// ignore_for_file: non_constant_identifier_names, prefer_const_constructors, unnecessary_new
+
 import 'package:flutter/material.dart';
-import 'package:zent/screens/notification.dart';
-import 'package:zent/screens/selectInstitute.dart';
+import 'package:zent/screens/Common/notification.dart';
+import 'package:zent/screens/zentProfile.dart';
 
 class ProgressPath extends StatefulWidget {
   const ProgressPath({super.key});
@@ -15,83 +17,74 @@ class _ProgressPathState extends State<ProgressPath> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
-
-        backgroundColor: Color(0xff2B9A9F),
-        title: Center(
+        backgroundColor: const Color(0xff2B9A9F),
+        title: const Center(
           child: Text(
             "Progress Path",
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
           ),
         ),
         actions: [
-            IconButton(
-                onPressed: () {
-                 Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>Notifications()),
-                          );
-                },
-                icon: Icon(Icons.notifications_none_outlined)),
-            IconButton(
-                onPressed: () {
-                  _SelectInstituteBottomSheet(context);
-                },
-                icon: Icon(Icons.more_vert)),
-          ],
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const Notifications()),
+                );
+              },
+              icon: const Icon(Icons.notifications_none_outlined)),
+          IconButton(
+              onPressed: () {
+                _SelectInstituteBottomSheet(context);
+              },
+              icon: const Icon(Icons.more_vert)),
+        ],
       ),
       body: SingleChildScrollView(
-        child: Container(
-          child: Padding(
-            padding: EdgeInsets.all(30),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  DefaultTabController(
-                    length: 3, // length of tabs
-                    // initialIndex: 0,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Container(
-                          child: TabBar(
-                            labelColor: Color.fromARGB(255, 0, 0, 0),
-                            unselectedLabelColor: Colors.black,
-                            tabs: [
-                              Tab(
-                                text: 'Todo',
-                              ),
-                              Tab(text: 'Progress'),
-                              Tab(text: 'Completed'),
-                            ],
+        child: Padding(
+          padding: const EdgeInsets.all(30),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                DefaultTabController(
+                  length: 3, // length of tabs
+                  // initialIndex: 0,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      const TabBar(
+                        labelColor: Color.fromARGB(255, 0, 0, 0),
+                        unselectedLabelColor: Colors.black,
+                        tabs: [
+                          Tab(
+                            text: 'Todo',
                           ),
+                          Tab(text: 'Progress'),
+                          Tab(text: 'Completed'),
+                        ],
+                      ),
+                      Container(
+                        height: double.maxFinite,
+                        //height of TabBarView
+                        decoration: const BoxDecoration(),
+                        child: const TabBarView(
+                          children: <Widget>[
+                            Todo(),
+                            Center(
+                              child: Text('Display Tab 2',
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                            Completed(),
+                          ],
                         ),
-                        Container(
-                          height: double.maxFinite,
-                          //height of TabBarView
-                          decoration: BoxDecoration(),
-                          child: TabBarView(
-                            children: <Widget>[
-                              Container(
-                                child: Todo(),
-                              ),
-                              Container(
-                                child: Center(
-                                  child: Text('Display Tab 2',
-                                      style: TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold)),
-                                ),
-                              ),
-                              Container(child: Completed()),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
-                ]),
-          ),
+                ),
+              ]),
         ),
       ),
     );
@@ -102,25 +95,28 @@ void _SelectInstituteBottomSheet(context) {
   showModalBottomSheet(
       context: context,
       builder: (BuildContext bc) {
-        return Container(
-          child: Wrap(
-            children: <Widget>[
-              new ListTile(
-                  leading: new Icon(Icons.person_2_rounded),
-                  title: new Text('Profile'),
-                  onTap: () => {}),
-              new ListTile(
-                leading: new Icon(Icons.bar_chart),
-                title: new Text('Progress'),
-                onTap: () => {},
-              ),
-              new ListTile(
-                leading: new Icon(Icons.logout_outlined),
-                title: new Text('Logout'),
-                onTap: () => {},
-              ),
-            ],
-          ),
+        return Wrap(
+          children: <Widget>[
+            new ListTile(
+                leading: new Icon(Icons.person_2_rounded),
+                title: new Text('Profile'),
+                onTap: () => {
+
+                  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const ZentProfile()),
+        ),}),
+            new ListTile(
+              leading: new Icon(Icons.bar_chart),
+              title: new Text('Progress'),
+              onTap: () => {},
+            ),
+            new ListTile(
+              leading: new Icon(Icons.logout_outlined),
+              title: new Text('Logout'),
+              onTap: () => {},
+            ),
+          ],
         );
       });
 }
@@ -152,17 +148,19 @@ class _TodoState extends State<Todo> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(14),
+      padding: const EdgeInsets.all(14),
       child: ListView.builder(
         itemCount: TodoList.length,
         itemBuilder: (BuildContext context, int index) {
           return Card(
             child: ListTile(
-              leading:  Image.asset( "${TodoList.elementAt(index)['images']}",),
+              leading: Image.asset(
+                "${TodoList.elementAt(index)['images']}",
+              ),
               title: Text(
                 "${TodoList.elementAt(index)['title']}",
                 textAlign: TextAlign.left,
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 15,
                     color: Colors.black),
@@ -171,11 +169,11 @@ class _TodoState extends State<Todo> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.calendar_month),
+                      const Icon(Icons.calendar_month),
                       Text(
                         "${TodoList.elementAt(index)['date']}",
                         textAlign: TextAlign.left,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 11,
                             color: Colors.black),
@@ -184,11 +182,11 @@ class _TodoState extends State<Todo> {
                   ),
                   Row(
                     children: [
-                      Icon(Icons.book),
+                      const Icon(Icons.book),
                       Text(
                         "${TodoList.elementAt(index)['subject']}",
                         textAlign: TextAlign.left,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 11,
                             color: Colors.black),
@@ -197,18 +195,17 @@ class _TodoState extends State<Todo> {
                   ),
                   Row(
                     children: [
-                      Icon(Icons.alarm),
+                      const Icon(Icons.alarm),
                       Text(
                         "${TodoList.elementAt(index)['status']}",
                         textAlign: TextAlign.left,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 11,
                             color: Colors.black),
                       )
                     ],
                   ),
-                  
                 ],
               ),
             ),
@@ -246,62 +243,69 @@ class _CompletedState extends State<Completed> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(14),
-        child: ListView.builder(
-            itemCount: CompletedList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Card(
-                  child: ListTile(
-                      leading: Image.asset( "${CompletedList.elementAt(index)['images']}"),
-                      title: Text(
-                        "${CompletedList.elementAt(index)['title']}",
+      padding: const EdgeInsets.all(14),
+      child: ListView.builder(
+        itemCount: CompletedList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Card(
+            child: ListTile(
+              leading:
+                  Image.asset("${CompletedList.elementAt(index)['images']}"),
+              title: Text(
+                "${CompletedList.elementAt(index)['title']}",
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15,
+                    color: Colors.black),
+              ),
+              subtitle: Column(
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.calendar_month),
+                      Text(
+                        "${CompletedList.elementAt(index)['date']}",
                         textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 15,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 11,
                             color: Colors.black),
-                      ),
-                      subtitle: Column(children: [
-                        Row(
-                          children: [
-                            Icon(Icons.calendar_month),
-                            Text(
-                              "${CompletedList.elementAt(index)['date']}",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 11,
-                                  color: Colors.black),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Icon(Icons.book),
-                            Text(
-                              "${CompletedList.elementAt(index)['subject']}",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 11,
-                                  color: Colors.black),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Icon(Icons.alarm),
-                            Text(
-                              "${CompletedList.elementAt(index)['status']}",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 11,
-                                  color: Colors.black),
-                            )
-                          ],
-                        ),
-                      ],),),);
-            },),);
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(Icons.book),
+                      Text(
+                        "${CompletedList.elementAt(index)['subject']}",
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 11,
+                            color: Colors.black),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(Icons.alarm),
+                      Text(
+                        "${CompletedList.elementAt(index)['status']}",
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 11,
+                            color: Colors.black),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, prefer_const_constructors, unnecessary_new
+
 import 'package:flutter/material.dart';
 
 class Notifications extends StatefulWidget {
@@ -29,25 +31,30 @@ class _NotificationsState extends State<Notifications> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        
                 toolbarHeight: 80,
 
-        backgroundColor: Color(0xff2B9A9F),
-        title: Center(
+        backgroundColor: const Color(0xff2B9A9F),
+        title: const Center(
           child: Text(
             "Notifications",
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
           ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(14),
+      body: 
+      
+      Padding(
+        padding: const EdgeInsets.all(14),
         child: ListView.builder(
           itemCount: NotificationsList.length,
           itemBuilder: (BuildContext context, int index) {
-            return Card(
+            return 
+            
+            Card(
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundColor: Color.fromARGB(255, 219, 218, 216),
+                  backgroundColor: const Color.fromARGB(255, 219, 218, 216),
                   radius: 30.0,
                   child: ClipOval(
                     child: Image.asset(
@@ -58,7 +65,7 @@ class _NotificationsState extends State<Notifications> {
                 title: Text(
                   "${NotificationsList.elementAt(index)['title']}",
                   textAlign: TextAlign.left,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 15,
                       color: Colors.black),
@@ -66,7 +73,7 @@ class _NotificationsState extends State<Notifications> {
                 subtitle: Text(
                   "${NotificationsList.elementAt(index)['date']}",
                   textAlign: TextAlign.left,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: 11,
                       color: Colors.black),
@@ -90,21 +97,19 @@ void NotificationsBottomSheet(context) {
   showModalBottomSheet(
       context: context,
       builder: (BuildContext bc) {
-        return Container(
-          child: Wrap(
-            children: <Widget>[
-              new ListTile(
-                  leading: new Icon(Icons.delete_outline),
-                  title: new Text('Delete'),
-                  onTap: () => {}),
-              new ListTile(
-                leading: new Icon(Icons.mark_as_unread),
-                title: new Text('Mark as unread'),
-                onTap: () => {},
-              ),
-            
-            ],
-          ),
+        return Wrap(
+          children: <Widget>[
+            new ListTile(
+                leading: new Icon(Icons.delete_outline),
+                title: new Text('Delete'),
+                onTap: () => {}),
+            new ListTile(
+              leading: new Icon(Icons.mark_as_unread),
+              title: new Text('Mark as unread'),
+              onTap: () => {},
+            ),
+          
+          ],
         );
       });
 }

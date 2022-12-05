@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: non_constant_identifier_names, prefer_const_constructors, unnecessary_new, file_names
+
 import 'package:flutter/material.dart';
-import 'package:zent/screens/notification.dart';
+import 'package:zent/screens/Common/notification.dart';
 import 'package:zent/screens/progresspath.dart';
 
 class SelectInstitute extends StatefulWidget {
@@ -18,8 +19,8 @@ class _SelectInstituteState extends State<SelectInstitute> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           toolbarHeight: 80,
-          backgroundColor: Color(0xff2B9A9F),
-          title: Center(
+          backgroundColor: const Color(0xff2B9A9F),
+          title: const Center(
             child: Text(
               "              Welcome back!",
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
@@ -31,15 +32,15 @@ class _SelectInstituteState extends State<SelectInstitute> {
                  Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>Notifications()),
+                                builder: (context) =>const Notifications()),
                           );
                 },
-                icon: Icon(Icons.notifications_none_outlined)),
+                icon: const Icon(Icons.notifications_none_outlined)),
             IconButton(
                 onPressed: () {
                   _SelectInstituteBottomSheet(context);
                 },
-                icon: Icon(Icons.more_vert)),
+                icon: const Icon(Icons.more_vert)),
           ],
         ),
         body: SingleChildScrollView(
@@ -47,7 +48,7 @@ class _SelectInstituteState extends State<SelectInstitute> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+            children: const [
               Text.rich(
                 TextSpan(
                   children: <TextSpan>[
@@ -65,7 +66,7 @@ class _SelectInstituteState extends State<SelectInstitute> {
                   ],
                 ),
               ),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(left: 55, right: 55),
                 child: GridB(),
               ),
@@ -81,25 +82,23 @@ void _SelectInstituteBottomSheet(context) {
   showModalBottomSheet(
       context: context,
       builder: (BuildContext bc) {
-        return Container(
-          child: Wrap(
-            children: <Widget>[
-              new ListTile(
-                  leading: new Icon(Icons.person_2_rounded),
-                  title: new Text('Profile'),
-                  onTap: () => {}),
-              new ListTile(
-                leading: new Icon(Icons.bar_chart),
-                title: new Text('Progress'),
-                onTap: () => {},
-              ),
-              new ListTile(
-                leading: new Icon(Icons.logout_outlined),
-                title: new Text('Logout'),
-                onTap: () => {},
-              ),
-            ],
-          ),
+        return Wrap(
+          children: <Widget>[
+            new ListTile(
+                leading: new Icon(Icons.person_2_rounded),
+                title: new Text('Profile'),
+                onTap: () => {}),
+            new ListTile(
+              leading: new Icon(Icons.bar_chart),
+              title: new Text('Progress'),
+              onTap: () => {},
+            ),
+            new ListTile(
+              leading: new Icon(Icons.logout_outlined),
+              title: new Text('Logout'),
+              onTap: () => {},
+            ),
+          ],
         );
       });
 }
@@ -155,39 +154,28 @@ class _GridBState extends State<GridB> {
             borderRadius: BorderRadius.circular(
               16.0,
             ),
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: const Color.fromARGB(255, 255, 255, 255),
           ),
-          child: Container(
-              
-              child:ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(15.0),
-                  topRight: Radius.circular(15.0),
-                ),
-                child: Image.asset(
-                  "${gridMap.elementAt(index)['images']}",
-                  height: 100,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-                
-              ),
-              //  Text(
-              //   "${gridMap.elementAt(index)['title']}",
-              //   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
-              // ),
-              // TextButton(onPressed: (){}, child: Text( "${gridMap.elementAt(index)['title']}",
-              //   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15,),))
-              
+          child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(15.0),
+              topRight: Radius.circular(15.0),
+            ),
+            child: Image.asset(
+              "${gridMap.elementAt(index)['images']}",
+              height: 100,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
             
           ),),
            TextButton(onPressed: (){ Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ProgressPath(),
+                      builder: (context) => const ProgressPath(),
                     ),
                   );}, child: Text( "${gridMap.elementAt(index)['title']}",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15,color: Colors.black45),),),
+                style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15,color: Colors.black45),),),
              
        ] );
       },

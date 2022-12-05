@@ -10,14 +10,16 @@ class Logo extends StatefulWidget {
 }
 
 class _LogoState extends State<Logo> {
+  @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     Timer(
-      Duration(seconds:3),
+      const Duration(seconds:3),
       () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => LoginSplace(),),
+                MaterialPageRoute(builder: (context) => const LoginSplace(),),
               ),
     );
   }
