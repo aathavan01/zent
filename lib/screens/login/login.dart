@@ -111,7 +111,6 @@ class _LoginState extends State<Login> {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text('OTP sent')));
                             Navigator.push(
-
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Otp(
@@ -119,7 +118,6 @@ class _LoginState extends State<Login> {
                                 ),
                               ),
                             );
-
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               // ignore: prefer_const_constructors

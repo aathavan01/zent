@@ -27,6 +27,9 @@ migration:
     - platform: macos
       create_revision: 197df2e19d2689e12be93ebd9a194a56cccf2681
       base_revision: 197df2e19d2689e12be93ebd9a194a56cccf2681
+    - platform: web
+      create_revision: 197df2e19d2689e12be93ebd9a194a56cccf2681
+      base_revision: 197df2e19d2689e12be93ebd9a194a56cccf2681
     - platform: windows
       create_revision: 197df2e19d2689e12be93ebd9a194a56cccf2681
       base_revision: 197df2e19d2689e12be93ebd9a194a56cccf2681

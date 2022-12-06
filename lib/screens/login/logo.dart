@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'loginSplace.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Logo extends StatefulWidget {
   const Logo({super.key});
@@ -16,18 +17,21 @@ class _LogoState extends State<Logo> {
     // TODO: implement initState
     super.initState();
     Timer(
-      const Duration(seconds:3),
+      const Duration(seconds: 3),
       () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginSplace(),),
-              ),
+        context,
+        MaterialPageRoute(
+          builder: (context) => const LoginSplace(),
+        ),
+      ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center( child:Image.asset("images/Zent.png", height: 130),
+        body: Center(
+      child: Image.asset("images/Zent.png", height: 130),
     ));
   }
 }
-

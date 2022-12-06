@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:zent/screens/Common/notification.dart';
+import 'package:zent/screens/editProfile.dart';
 
 class ZentProfile extends StatefulWidget {
   const ZentProfile({super.key});
@@ -11,50 +12,97 @@ class ZentProfile extends StatefulWidget {
 }
 
 class _ZentProfileState extends State<ZentProfile> {
+   final List<Map<String, dynamic>> ProfileInfoList = [
+    {
+      "name": "AATHAV",
+      "images": "images/images/ZentRoundedProfile.png",
+      "fullName": "Kovinthamoorthy aathavan",
+       "address": "Kanapathyappulam kopay center kopay",
+      "contactNumber": "0761903375"
+    },
+     {
+      "name": "AATHAV",
+      "images": "images/images/ZentRoundedProfile.png",
+      "fullName": "Kovinthamoorthy aathavan",
+       "address": "Kanapathyappulam kopay center kopay",
+      "contactNumber": "0761903375"
+    }
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      appBar: AppBar(
-        toolbarHeight: 80,
-        backgroundColor: const Color(0xff2B9A9F),
-        title: const Center(
-          child: Text(
-            "My Profile",
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
-          ),
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const Notifications()),
-                );
-              },
-              icon: const Icon(Icons.notifications_none_outlined)),
-          IconButton(
-              onPressed: () {
-                ZentProfileBottomSheet(context);
-              },
-              icon: const Icon(Icons.more_vert)),
-        ],
-      ),
-      body: Stack(
-        alignment: Alignment.center,
-        
+      body: Column(
         children: [
-          Container(
-            
-            width: 300,
-            height: 100,
-            color: Colors.amber,
-            child: Image.asset(
-                  "images/ZentProfile.png",
-                  // fit: BoxFit.fitWidth,
-                  width: double.infinity
+          Stack(
+            children: <Widget>[
+              Container(
+                height: 160,
+                child: AppBar(
+                  toolbarHeight: 120,
+                  backgroundColor: const Color(0xff2B9A9F),
+                  title: const Center(
+                    child: Text(
+                      "My Profile",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+                    ),
+                  ),
+                  actions: [
+                    IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Notifications()),
+                          );
+                        },
+                        icon: const Icon(Icons.notifications_none_outlined)),
+                    IconButton(
+                        onPressed: () {
+                          ZentProfileBottomSheet(context);
+                        },
+                        icon: const Icon(Icons.more_vert)),
+                  ],
                 ),
+              ), // Container
+              Padding(
+                padding: const EdgeInsets.only(top: 110),
+                child: Container(
+                  color: Colors.white,
+                  height: 120,
+                  child: Image.asset("images/ZentProfile.png",
+                      // fit: BoxFit.fitWidth,
+                      width: double.infinity),
+                  margin: EdgeInsets.fromLTRB(45, 0, 45, 16),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 110),
+                child: Container(
+                  // color: Colors.white,
+                  height: 150,
+                  width: 120,
+
+                  child: Column(children: [
+                    Image.asset("images/ZentRoundedProfile.png",
+                        fit: BoxFit.fitWidth, width: double.infinity),
+                    Text("AATHAV")
+                  ]),
+
+                  margin: EdgeInsets.fromLTRB(40, 60, 45, 16),
+                ),
+              ),
+            ],
+          ),
+          Column(
+            children: [
+              SizedBox(
+                child: Text("Personal Information"),
+              ),
+              Container(
+                alignment: Alignment.center,
+                child: Text("data",),)
+            ],
           )
         ],
       ),
@@ -71,9 +119,12 @@ void ZentProfileBottomSheet(context) {
             new ListTile(
                 leading: new Icon(Icons.edit_outlined),
                 title: new Text('Edit personal Information'),
-                onTap: () => {}),
-          
+                onTap: () => {  Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const EditProfile()),
+              )}),
           ],
         );
-      });
+      },);
 }
+
