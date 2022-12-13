@@ -89,7 +89,6 @@ class _OtpState extends State<Otp> with ChangeNotifier {
                           print(z);
                           await storage.write(key: "token", value: "$z");
                           notifyListeners();
-
                           if (response1 != null) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
