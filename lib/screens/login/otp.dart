@@ -1,6 +1,7 @@
 // ignore_for_file: unrelated_type_equality_checks, unnecessary_null_comparison, use_build_context_synchronously, unnecessary_new, avoid_print
 
 import 'dart:convert';
+import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:zent/Verfication/mobileNO.dart';
@@ -15,9 +16,10 @@ class Otp extends StatefulWidget {
   State<Otp> createState() => _OtpState();
 }
 
-class _OtpState extends State<Otp> {
+class _OtpState extends State<Otp> with ChangeNotifier {
   final TextEditingController _otp = TextEditingController();
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -85,6 +87,8 @@ class _OtpState extends State<Otp> {
 
                           var z = jsonDecode(response1);
                           print(z);
+                          await storage.write(key: "token", value: "$z");
+                          notifyListeners();
 
                           if (response1 != null) {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -92,16 +96,13 @@ class _OtpState extends State<Otp> {
                                 content: Text('Signin Successfully'),
                               ),
                             );
-                            await storage.write(
-                                key: "token",
-                                value:
-                                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU5PIjoiOTQ3NjE5MDMzNzUiLCJpYXQiOjE2NzAzMjAzNzF9.7HxHoIcpxm4KBo0loZtXeRYpmPwfE7h2dir3kLDWpts");
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SelectInstitute(),
-                                ), // MaterialPageRoute
-                                (route) => false);
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SelectInstitute(),
+                              ),
+                            );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(content: Text('Signin Failed')));
